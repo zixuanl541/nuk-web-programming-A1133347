@@ -1,0 +1,171 @@
+/* public/css/app.css — CrossProfit Pro */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0d0f12;--bg2:#13161b;--bg3:#1a1e26;--bg4:#212630;
+  --border:#2a2f3d;--border2:#353b4d;
+  --text:#e8eaf0;--text2:#8892a4;--text3:#4d5566;
+  --accent:#3b82f6;--accent2:#1d4ed8;
+  --green:#22c55e;--yellow:#f59e0b;--red:#ef4444;
+  --green-bg:rgba(34,197,94,.1);--yellow-bg:rgba(245,158,11,.1);--red-bg:rgba(239,68,68,.1);
+  --mono:'JetBrains Mono',monospace;--sans:'Noto Sans TC',sans-serif;
+}
+
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+
+/* ── Layout ─────────────────────────────────────── */
+.app{display:flex;flex:1;min-height:100vh}
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:50;transition:width .15s}
+.main{flex:1;margin-left:220px;display:flex;flex-direction:column;min-height:100vh;transition:margin-left .15s}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40}
+.content{padding:2rem;flex:1}
+
+/* ── Sidebar ─────────────────────────────────────── */
+.logo{padding:1.25rem 1.25rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-shrink:0}
+.logo-title{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.05em;white-space:nowrap}
+.logo-sub{font-size:10px;color:var(--text3);margin-top:2px;white-space:nowrap}
+.sidebar-toggle{background:none;border:none;color:var(--text3);cursor:pointer;flex-shrink:0;padding:4px;border-radius:4px;display:flex}
+.sidebar-toggle:hover{color:var(--text);background:var(--bg3)}
+.sidebar-toggle svg{width:14px;height:14px;stroke:currentColor;transition:transform .15s}
+.nav{flex:1;padding:1rem 0;overflow-y:auto;min-height:0}
+.nav-group{margin-bottom:1.5rem}
+.nav-label{font-size:10px;font-family:var(--mono);color:var(--text3);letter-spacing:.1em;padding:0 1.25rem;margin-bottom:.5rem;text-transform:uppercase;display:block;white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:10px;padding:.55rem 1.25rem;cursor:pointer;transition:all .15s;border-left:2px solid transparent;color:var(--text2);font-size:13px;text-decoration:none;white-space:nowrap}
+.nav-item:hover{color:var(--text);background:var(--bg3)}
+.nav-item.active{color:var(--accent);background:rgba(59,130,246,.07);border-left-color:var(--accent)}
+.nav-icon{width:16px;height:16px;opacity:.7;flex-shrink:0}
+.nav-item.active .nav-icon{opacity:1}
+.sidebar-footer{padding:1rem 1.25rem;border-top:1px solid var(--border);flex-shrink:0}
+
+/* ── Sidebar collapsed state ──────────────────────── */
+html.sidebar-collapsed .sidebar{width:64px}
+html.sidebar-collapsed .main{margin-left:64px}
+html.sidebar-collapsed .logo{justify-content:center;padding:1.25rem .5rem 1rem}
+html.sidebar-collapsed .logo-text,
+html.sidebar-collapsed .nav-label,
+html.sidebar-collapsed .nav-text,
+html.sidebar-collapsed .footer-email,
+html.sidebar-collapsed .role-badge{display:none}
+html.sidebar-collapsed .nav-item{justify-content:center;padding:.55rem 0}
+html.sidebar-collapsed .sidebar-footer .flex{justify-content:center}
+html.sidebar-collapsed .sidebar-toggle svg{transform:rotate(180deg)}
+
+/* ── Topbar ─────────────────────────────────────── */
+.page-title{font-size:15px;font-weight:500}
+.page-sub{font-size:12px;color:var(--text3);margin-top:1px}
+
+/* ── Cards ─────────────────────────────────────── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.card-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.card-title-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ── Stat Cards ─────────────────────────────────── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.stat-label{font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.stat-value{font-size:26px;font-weight:700;font-family:var(--mono);line-height:1}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:.4rem}
+
+/* ── Tables ─────────────────────────────────────── */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:.6rem .75rem;color:var(--text3);font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);font-weight:400;white-space:nowrap}
+td{padding:.7rem .75rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg3)}
+.mono{font-family:var(--mono);font-size:12px}
+
+/* ── Badges ─────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-family:var(--mono);padding:3px 8px;border-radius:4px;font-weight:500;white-space:nowrap}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:rgba(59,130,246,.1);color:var(--accent)}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* ── Forms ─────────────────────────────────────── */
+.form-grid{display:grid;gap:12px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+label{font-size:12px;color:var(--text3);font-family:var(--mono)}
+input[type=text],input[type=number],input[type=email],input[type=password],input[type=date],select,textarea{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:6px;
+  padding:.55rem .75rem;color:var(--text);font-size:13px;font-family:var(--sans);
+  outline:none;transition:border .15s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+input::placeholder,textarea::placeholder{color:var(--text3)}
+select option{background:var(--bg3)}
+
+/* ── Buttons ─────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:.55rem 1.1rem;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:var(--sans);text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2)}
+.btn-ghost{background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--text)}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.btn-sm{padding:.35rem .75rem;font-size:12px}
+.btn-full{width:100%;justify-content:center}
+
+/* ── Alerts & Flash ─────────────────────────────── */
+.alert{border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem;font-size:13px;line-height:1.6}
+.alert-green{background:var(--green-bg);border:1px solid rgba(34,197,94,.2);color:var(--green)}
+.alert-yellow{background:var(--yellow-bg);border:1px solid rgba(245,158,11,.2);color:var(--yellow)}
+.alert-red{background:var(--red-bg);border:1px solid rgba(239,68,68,.2);color:var(--red)}
+.alert-title{font-weight:600;font-size:14px;margin-bottom:4px}
+
+/* ── Result Box ─────────────────────────────────── */
+.result-box{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:1.25rem}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:13px}
+.result-row:last-child{border-bottom:none}
+.result-label{color:var(--text3);font-family:var(--mono);font-size:12px}
+.result-total{font-size:20px;font-weight:700;font-family:var(--mono)}
+
+/* ── Grid Layouts ─────────────────────────────── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.section-title{font-size:15px;font-weight:500}
+.divider{height:1px;background:var(--border);margin:1rem 0}
+.mb-1{margin-bottom:.5rem}.mb-2{margin-bottom:1rem}.mb-3{margin-bottom:1.5rem}
+.flex{display:flex}.items-center{align-items:center}
+.gap-2{gap:.5rem}.gap-3{gap:.75rem}
+.text-right{text-align:right}
+
+/* ── Colors ─────────────────────────────────────── */
+.text-green{color:var(--green)}.text-yellow{color:var(--yellow)}
+.text-red{color:var(--red)}.text-blue{color:var(--accent)}.text-muted{color:var(--text3)}
+
+/* ── Warn Strip ─────────────────────────────────── */
+.warn-strip{display:flex;gap:8px;margin-bottom:1rem}
+.warn-item{flex:1;border-radius:7px;padding:10px 14px;font-size:12px;font-weight:500;text-align:center}
+.warn-item span{display:block;font-size:10px;opacity:.7;margin-top:2px}
+
+/* ── Chart ─────────────────────────────────────── */
+.chart-wrap{position:relative;height:220px;margin-top:.75rem}
+
+/* ── Role Badge ─────────────────────────────────── */
+.role-badge{font-size:11px;font-family:var(--mono);background:rgba(59,130,246,.12);color:var(--accent);padding:4px 10px;border-radius:4px;border:1px solid rgba(59,130,246,.2)}
+
+/* ── Login Page ─────────────────────────────────── */
+.login-wrap{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.login-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:2.5rem;width:380px}
+.login-logo{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--accent);margin-bottom:.25rem}
+.login-sub{font-size:12px;color:var(--text3);margin-bottom:2rem}
+
+/* ── Pagination ─────────────────────────────────── */
+.pagination{display:flex;gap:4px;margin-top:1rem;justify-content:flex-end}
+.page-btn{padding:.35rem .7rem;border-radius:5px;font-size:12px;font-family:var(--mono);border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;text-decoration:none}
+.page-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.page-btn:hover:not(.active){border-color:var(--border);color:var(--text)}
+
+@media(max-width:900px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .sidebar{width:180px}
+  .main{margin-left:180px}
+  .stats-grid{grid-template-columns:1fr}
+}
